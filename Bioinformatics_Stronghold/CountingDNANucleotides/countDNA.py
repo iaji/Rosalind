@@ -1,18 +1,23 @@
 with open('rosalind_dna.txt', 'r') as f:
     data = f.read()
-result = [A, C, G, T]
+
 A = 0
-C = 1
-G = 2
-T = 3
+C = 0
+G = 0
+T = 0
+
 for nucelotide in data:
     if nucelotide == 'A':
-        result[0] += 1
+        A += 1
     elif nucelotide == 'C':
-        result[1] += 1
+        C += 1
     elif nucelotide == 'G':
-        result[2] += 1
+        G += 1
     elif nucelotide == 'T':
-        result[3] += 1
+        T += 1
+    else:
+        print(nucelotide)
+
+result = [A, C, G, T]
 
 print result
