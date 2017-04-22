@@ -8,4 +8,5 @@ def fib_rabbits(n,k):
 
 with open('rosalind_fib.txt') as inputs:
     n, k = map(int, inputs.read().strip().split())
-    print n, k
+
+print fib_rabbits(n,k)
