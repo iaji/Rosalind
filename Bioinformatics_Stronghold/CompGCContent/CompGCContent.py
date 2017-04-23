@@ -1,14 +1,30 @@
 import re
-regexp = re.compile(r'Rosalind.')
-output = ''
-DNAinfo = open('data.txt')
-lines = DNAinfo.readlines()
-StrandPart = []
-FinishedStrand = ''
-#StrandCount = 0
-for line in lines:
-    while not regexp.search(line) and len(line) == 61:
-        for char in line:
-            MostStrand = ''.join(char)
+from Bio import SeqIO
 
-print MostStrand
+def GetGCPer(sequence):
+    G = sequence.count('G')
+    C = sequence.count('C')
+    GC = G + C
+    return 100 * (GC / float(len(sequence)))
+
+def GrabData():
+    DNA_Sequences = SeqIO.parse(open('data.txt'),'fasta')
+    tup = ()
+    GCPercents = []
+    for fasta in DNA_Sequences:
+        name, sequence = fasta.id, fasta.seq.tostring()
+        GCper = GetGCPer(sequence)
+        tup = (name, GCper)
+        GCPercents.append(tup)
+    return GCPercents
+
+def main():
+    x = []
+    data = GrabData()
+    for tup in data:
+        x.append(tup[1])
+    best = max(x)
+    for tup in data:
+        if tup[1] == best:
+            print tup
+main()
