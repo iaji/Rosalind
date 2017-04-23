@@ -1,4 +1,3 @@
-import re
 from Bio import SeqIO
 
 def GetGCPer(sequence):
